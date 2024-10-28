@@ -1,0 +1,943 @@
+<html><head><base href="https://websimfit.com/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerFit2</title>
+    <style>
+    :root {
+        --primary: #ff4d4d;
+        --secondary: #333;
+        --light: #f4f4f4;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+        line-height: 1.6;
+    }
+    
+    /* Navegação */
+    nav {
+        position: fixed;
+        width: 100%;
+        background: rgba(0,0,0,0.9);
+        padding: 1rem;
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        margin-right: 1rem;
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    
+    .nav-links {
+        margin-right: 4%;
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+    
+    .hero {
+        height: 100vh;
+        background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                    url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48') center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+    }
+    
+    .hero p {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.5s backwards;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: transform 0.3s;
+        animation: fadeInUp 1s ease 1s backwards;
+    }
+    
+    .btn:hover {
+        transform: translateY(-3px);
+    }
+    
+    .features {
+        padding: 5rem 2rem;
+        background: var(--light);
+    }
+    
+    .features-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+    
+    /* Seção Planos */
+    .pricing {
+        padding: 5rem 2rem;
+        background: white;
+    }
+    
+    .pricing-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+    
+    .pricing-card {
+        background: var(--light);
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    
+    .pricing-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .price {
+        font-size: 3rem;
+        color: var(--primary);
+        margin: 1rem 0;
+    }
+    
+    /* Seção Instrutores */
+    .instructors {
+        padding: 5rem 2rem;
+        background: var(--light);
+    }
+    
+    .instructors-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+    
+    .instructor-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .instructor-img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+    
+    .instructor-info {
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .cta {
+        background: var(--primary);
+        color: white;
+        text-align: center;
+        padding: 5rem 2rem;
+    }
+    
+    /* Menu Mobile */
+    .menu-btn {
+        display: none;
+        cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+        .menu-btn {
+            display: block;
+        }
+        
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: rgba(20, 20, 20, 0.9);
+            flex-direction: column;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .nav-links.active {
+            display: flex;
+            
+        }
+        .nav-container .edit-btn{
+            left: 20rem;
+            background: rgba(235, 12, 12, 0.9);
+    }
+}
+    
+    /* Add to existing CSS */
+    .edit-btn {
+        position: absolute;
+        right: 10px;
+        background: rgba(0,0,0,0.7);
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+    .edit-btn-nav{
+        position: absolute;
+        margin-left: 11rem;
+        background: rgba(202, 21, 21, 0.7);
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.3s;
+    }
+    
+    .edit-btn:hover {
+        background: rgba(0,0,0,0.9);
+    }
+    
+    .edit-btn svg, .edit-btn-nav svg{
+        width: 16px;
+        height: 16px;
+        fill: white;
+    }
+    
+    .feature-card, .pricing-card, .instructor-card, .hero {
+        position: relative;
+    }
+    
+    .edit-modal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        z-index: 1100;
+        display: none;
+    }
+    
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 1050;
+        display: none;
+    }
+    
+    .edit-modal input, .edit-modal select {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    
+    .edit-modal button {
+        padding: 8px 16px;
+        margin-top: 10px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .footer-email{margin-bottom: 1em;}
+    .footer-content .btn{    
+        display: inline-block;
+    padding: .5rem 1rem;
+    background: #333;
+    color: white;}
+    </style>
+    </head>
+    <body id="inicio" >
+        <body id="inicio" >
+            <nav>
+                <div  class="nav-container">
+                    <a href="https://websimfit.com/" class="logo">PowerFit</a>
+                    <button class="edit-btn-nav" onclick="openEditor('logo', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <div class="menu-btn">
+                        <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        </svg>
+                    </div>
+                    <div class="nav-links">
+                        <a href="#sobre">Sobre</a>
+                    <button class="edit-btn" onclick="openEditorLinks('nav-link', event,'Sobre')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <a href="#planos">Planos</a>
+                    <button class="edit-btn" onclick="openEditorLinks('nav-link', event, 'Planos')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <a id="Instrutores"  href="#instrutores">Instrutores</a>
+                    <button  class="edit-btn" onclick="openEditorLinks('nav-link', event, 'Instrutores')">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <a href="#inicio">Contato</a>
+                    <button class="edit-btn" onclick="openEditorLinks('nav-link', event, ['Contatos','Instrutores'])">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    </div>
+                </div>
+            </nav>
+    
+        <section class="hero">
+            <div class="hero-content">
+                <button class="edit-btn" onclick="openEditor('hero-content', event)">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                    </svg>
+                </button>
+                <h1>PowerFit Academy</h1>
+                <p>Transforme seu corpo, mente e vida com nossos programas personalizados</p>
+                <a href="https://websimfit.com/cadastro" class="btn">Comece Hoje</a>
+            </div>
+        </section>
+    
+        <section id="sobre" class="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <button class="edit-btn" onclick="openEditor('feature', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="var(--primary)">
+                        <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
+                    </svg>
+                    <h3>Equipamentos Modernos</h3>
+                    <p>Academia equipada com as últimas tecnologias em fitness</p>
+                </div>
+                <div class="feature-card">
+                    <button class="edit-btn" onclick="openEditor('feature', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="var(--primary)">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z"/>
+                    </svg>
+                    <h3>Profissionais Qualificados</h3>
+                    <p>Equipe de instrutores certificados e experientes</p>
+                </div>
+                <div class="feature-card">
+                    <button class="edit-btn" onclick="openEditor('feature', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <svg class="feature-icon" viewBox="0 0 24 24" fill="var(--primary)">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                    </svg>
+                    <h3>Aulas Variadas</h3>
+                    <p>Musculação, CrossFit, Yoga, Pilates e muito mais</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="planos" class="pricing">
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <button class="edit-btn" onclick="openEditor('pricing', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <h3>Plano Básico</h3>
+                    <div class="price">R$89,90</div>
+                    <ul>
+                        <li>Acesso à musculação</li>
+                        <li>Horário comercial</li>
+                        <li>Avaliação física mensal</li>
+                    </ul>
+                    <a href="https://websimfit.com/assinar/basico" class="btn">Assinar</a>
+                </div>
+                <div class="pricing-card">
+                    <button class="edit-btn" onclick="openEditor('pricing', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <h3>Plano Premium</h3>
+                    <div class="price">R$149,90</div>
+                    <ul>
+                        <li>Acesso total às instalações</li>
+                        <li>Todas as aulas inclusas</li>
+                        <li>Acesso 24h</li>
+                        <li>Avaliação física quinzenal</li>
+                    </ul>
+                    <a href="https://websimfit.com/assinar/premium" class="btn">Assinar</a>
+                </div>
+                <div class="pricing-card">
+                    <button class="edit-btn" onclick="openEditor('pricing', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <h3>Plano Família</h3>
+                    <div class="price">R$249,90</div>
+                    <ul>
+                        <li>Até 3 pessoas</li>
+                        <li>Todos os benefícios Premium</li>
+                        <li>Personal Trainer dedicado</li>
+                    </ul>
+                    <a href="https://websimfit.com/assinar/familia" class="btn">Assinar</a>
+                </div>
+            </div>
+        </section>
+
+        <section  class="instructors">
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <button class="edit-btn" onclick="openEditor('instructor', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b" alt="Instrutor de musculação profissional" class="instructor-img">
+                    <div class="instructor-info">
+                        <h3>João Silva</h3>
+                        <p>Especialista em Musculação</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <button class="edit-btn" onclick="openEditor('instructor', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b" alt="Instrutora de yoga em pose meditativa" class="instructor-img">
+                    <div class="instructor-info">
+                        <h3>Maria Santos</h3>
+                        <p>Instrutora de Yoga</p>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <button class="edit-btn" onclick="openEditor('instructor', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                    <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61" alt="Instrutor de CrossFit em ação" class="instructor-img">
+                    <div class="instructor-info">
+                        <h3>Pedro Costa</h3>
+                        <p>Coach de CrossFit</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <footer class="footer">
+                <div class="footer-content">
+                    <h2>Entre em Contato</h2>
+                    <p>CNPJ: 12.345.678/0001-90</p>
+                    <p>Endereço: Rua Exemplo, 123 - Centro, Cidade - Estado</p>
+                    <p>Telefone: (11) 1234-5678</p>
+                    <p class="footer-email">Email: contato@powerfit.com</p>
+                    <a href="https://websimfit.com/promocao" class="btn">Aproveitar Oferta</a>
+                    <button class="edit-btn" onclick="openEditor('footer', event)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </button>
+                </div>
+            </footer>
+        </section>
+
+        <div class="modal-overlay"></div>
+        <div class="edit-modal">
+            <h3>Editar Elemento</h3>
+            <div id="edit-form"></div>
+        </div>
+
+        <script>
+            let currentEditElement = null; // Add this variable to track currently edited element
+
+            // Menu Mobile Toggle
+            const menuBtn = document.querySelector('.menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Navbar Scroll Effect
+            window.addEventListener('scroll', () => {
+                const nav = document.querySelector('nav');
+                if (window.scrollY > 50) {
+                    nav.style.background = 'rgba(0,0,0,0.9)';
+                    nav.style.padding = '0.5rem 1rem';
+                } else {
+                    nav.style.background = 'rgba(0,0,0,0.7)';
+                    nav.style.padding = '1rem';
+                }
+            });
+
+            // Smooth Scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animation on Scroll
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.feature-card, .pricing-card, .instructor-card').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.6s ease-out';
+                observer.observe(element);
+            });
+
+            function openEditor(type, event) {
+                const modal = document.querySelector('.edit-modal');
+                const overlay = document.querySelector('.modal-overlay');
+                const form = document.getElementById('edit-form');
+                
+                // Store the clicked element
+                currentEditElement = event.target.closest(`.${type}-card`) || 
+                                    event.target.closest(`.${type}`);
+                
+                let formHtml = '';
+                
+                switch(type) {
+                    case 'hero':
+                        formHtml = `
+                            <input type="text" id="edit-title" placeholder="Título">
+                            <input type="text" id="edit-subtitle" placeholder="Subtítulo">
+                            <input type="text" id="edit-background" placeholder="URL da imagem de fundo">
+                            <label>Cor do Overlay:</label>
+                            <input type="color" id="edit-overlay-color" value="#000000">
+                            <label>Cor do Botão:</label>
+                            <input type="color" id="edit-button-color" value="#ff4d4d">
+                            <button onclick="saveEdits('hero')">Salvar</button>
+                        `;
+                        break;
+                    case 'hero-content':
+                        formHtml = `<div>
+                                <label>Título:</label>
+                                <input type="text" id="edit-hero-title" placeholder="Título">
+                                <label>Cor do Título:</label>
+                                <input type="color" id="edit-hero-title-color" value="#ffffff">
+                                
+                                <label>Subtítulo:</label>
+                                <input type="text" id="edit-hero-subtitle" placeholder="Subtítulo">
+                                <label>Cor do Subtítulo:</label>
+                                <input type="color" id="edit-hero-subtitle-color" value="#ffffff">
+                                
+                                <label>Imagem de Fundo:</label>
+                                <input type="text" id="edit-hero-bg-url" placeholder="URL da imagem">
+                                <input type="file" id="edit-hero-bg-file" accept="image/*">
+                                
+                                <label>Texto do Botão:</label>
+                                <input type="text" id="edit-hero-btn-text" placeholder="Texto do botão">
+                                <label>Cor do Botão:</label>
+                                <input type="color" id="edit-hero-btn-color" value="#ff4d4d">
+                                
+                                <button onclick="saveEdits('hero-content')">Salvar</button>
+                            </div>
+                        `;
+                        break;
+                    case 'feature':
+                        formHtml = `
+                            <input type="text" id="edit-feature-title" placeholder="Título">
+                            <input type="text" id="edit-feature-description" placeholder="Descrição">
+                            <label>Cor do Ícone:</label>
+                            <input type="color" id="edit-feature-color" value="#ff4d4d">
+                            <label>Cor de Fundo:</label>
+                            <input type="color" id="edit-feature-bg" value="#ffffff">
+                            <button onclick="saveEdits('feature')">Salvar</button>
+                        `;
+                        break;
+                    case 'pricing':
+                        formHtml = `
+                            <input type="text" id="edit-plan-title" placeholder="Nome do Plano">
+                            <input type="text" id="edit-plan-price" placeholder="Preço">R$
+                            <label>Cor do Preço:</label>
+                            <input type="color" id="edit-price-color" value="#ff4d4d">
+                            <label>Cor de Fundo:</label>
+                            <input type="color" id="edit-pricing-bg" value="#f4f4f4">
+                            <label>Cor do Botão:</label>
+                            <input type="color" id="edit-pricing-button" value="#ff4d4d">
+                            <button onclick="saveEdits('pricing')">Salvar</button>
+                        `;
+                        break;
+                    case 'instructor':
+                        formHtml = `
+                            <input type="text" id="edit-instructor-name" placeholder="Nome">
+                            <input type="text" id="edit-instructor-role" placeholder="Função">
+                            <input type="text" id="edit-instructor-image" placeholder="URL da imagem">
+                            <label>Cor de Fundo:</label>
+                            <input type="color" id="edit-instructor-bg" value="#ffffff">
+                            <button onclick="saveEdits('instructor')">Salvar</button>
+                        `;
+                        break;
+                    case 'logo':
+                        formHtml = `
+                            <label>Texto do Logo:</label>
+                            <input type="text" id="edit-logo-text" placeholder="Texto">
+                            <label>Cor do Logo:</label>
+                            <input type="color" id="edit-logo-color" value="#ff4d4d">
+                            <button onclick="saveEdits('logo')">Salvar</button>
+                        `;
+                        break;
+                    case 'footer':
+                        formHtml = `
+                            <label>Texto do Título:</label>
+                            <input type="text" id="edit-footer-title" value="${currentEditElement.querySelector('h2').textContent}" placeholder="Título">
+
+                            <label>CNPJ:</label>
+                            <input type="text" id="edit-footer-cnpj" value="${currentEditElement.querySelectorAll('p')[0].textContent.replace('CNPJ: ', '')}" placeholder="CNPJ">
+
+                            <label>Endereço:</label>
+                            <input type="text" id="edit-footer-address" value="${currentEditElement.querySelectorAll('p')[1].textContent.replace('Endereço: ', '')}" placeholder="Endereço">
+
+                            <label>Telefone:</label>
+                            <input type="text" id="edit-footer-phone" value="${currentEditElement.querySelectorAll('p')[2].textContent.replace('Telefone: ', '')}" placeholder="Telefone">
+
+                            <label>Email:</label>
+                            <input type="text" id="edit-footer-email" value="${currentEditElement.querySelectorAll('p')[3].textContent.replace('Email: ', '')}" placeholder="Email">
+
+                            <label>Texto do Botão:</label>
+                            <input type="text" id="edit-footer-btn-text" value="${currentEditElement.querySelector('.btn').textContent}" placeholder="Texto do Botão">
+
+                            <button onclick="saveEdits('footer')">Salvar</button>
+                        `;
+                        break;
+                }
+                form.innerHTML = formHtml;
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+
+            function openEditorLinks(type, event) {
+                const modal = document.querySelector('.edit-modal');
+                const overlay = document.querySelector('.modal-overlay');
+                const form = document.getElementById('edit-form');
+
+                // Select all nav links
+                const navLinks = document.querySelectorAll('.nav-links a');
+                currentEditElement = navLinks; // Store all links for editing
+                
+                let formHtml = `
+                    <h4>Editable Nav Links</h4>
+                `;
+
+                // Loop through each nav link and create inputs for editing
+                navLinks.forEach((link, index) => {
+                    formHtml += `
+                        <input type="text" id="edit-nav-title-${index}" placeholder="Texto do Link" value="${link.textContent}">
+                        <label>Cor do Link ${index + 1}:</label>
+                        <input type="color" id="edit-nav-color-${index}" value="${getComputedStyle(link).color}">
+                    `;
+                });
+
+                formHtml += `<button onclick="saveEditsLink('nav-link', ${navLinks.length})">Salvar</button>`;
+
+                form.innerHTML = formHtml;
+                modal.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+
+            function saveEditsLink(type, numberOfLinks) {
+                if (type === 'nav-link') {
+                    if (!currentEditElement) return;
+
+                    currentEditElement.forEach((link, index) => {
+                        const navTitle = document.getElementById(`edit-nav-title-${index}`).value;
+                        if(navTitle=='null') return;                        
+                        if (navTitle) link.textContent = navTitle;
+                    })
+                    currentEditElement.forEach((link, index) => {
+                        const navColor = document.getElementById(`edit-nav-color-${index}`).value;
+                        if(navColor == '#000000') return;                        
+                        if (navColor) link.style.color = navColor;
+                    }
+                
+                );
+                }
+
+                // Reset currentEditElement
+                currentEditElement = null;
+
+                // Close modal after saving
+                document.querySelector('.edit-modal').style.display = 'none';
+                document.querySelector('.modal-overlay').style.display = 'none';
+            }
+
+            // Close modal when clicking overlay
+                document.querySelector('.modal-overlay').addEventListener('click', () => {
+                document.querySelector('.edit-modal').style.display = 'none';
+                document.querySelector('.modal-overlay').style.display = 'none';
+            });
+            function saveEdits(type) {
+                switch(type) {
+                    case 'hero':
+                        const heroSection = document.querySelector('.hero');
+                        const heroTitle = document.querySelector('.hero h1');
+                        const heroSubtitle = document.querySelector('.hero p');
+                        const heroButton = document.querySelector('.hero .btn');
+
+                        const newTitle = document.getElementById('edit-title').value;
+                        const newSubtitle = document.getElementById('edit-subtitle').value;
+                        const newBackground = document.getElementById('edit-background').value;
+                        const newOverlayColor = document.getElementById('edit-overlay-color').value;
+                        const newButtonColor = document.getElementById('edit-button-color').value;
+
+                        if (newTitle) heroTitle.textContent = newTitle;
+                        if (newSubtitle) heroSubtitle.textContent = newSubtitle;
+                        if (newBackground) {
+                            heroSection.style.background = `linear-gradient(${newOverlayColor}80, ${newOverlayColor}80), url('${newBackground}') center/cover`;
+                        }
+                        if (newButtonColor) heroButton.style.backgroundColor = newButtonColor;
+                        break;
+
+                    case 'hero-content':
+                        const heroContent = document.querySelector('.hero-content');
+                        const heroTitleContent = heroContent.querySelector('h1');
+                        const heroSubtitleContent = heroContent.querySelector('p');
+                        const heroButtonContent = heroContent.querySelector('.btn');
+                        const heroSectionContent = document.querySelector('.hero');
+    
+                        const newHeroTitle = document.getElementById('edit-hero-title').value;
+                        const heroTitleColor = document.getElementById('edit-hero-title-color').value;
+                        const newHeroSubtitle = document.getElementById('edit-hero-subtitle').value;
+                        const heroSubtitleColor = document.getElementById('edit-hero-subtitle-color').value;
+                        const newHeroButtonText = document.getElementById('edit-hero-btn-text').value;
+                        const heroButtonColor = document.getElementById('edit-hero-btn-color').value;
+    
+                        if (newHeroTitle) heroTitleContent.textContent = newHeroTitle;
+                        if (heroTitleColor) heroTitleContent.style.color = heroTitleColor;
+                        if (newHeroSubtitle) heroSubtitleContent.textContent = newHeroSubtitle;
+                        if (heroSubtitleColor) heroSubtitleContent.style.color = heroSubtitleColor;
+                        if (newHeroButtonText) heroButtonContent.textContent = newHeroButtonText;
+                        if (heroButtonColor) heroButtonContent.style.backgroundColor = heroButtonColor;
+                        
+                        // Handle background image
+                        const bgUrlInput = document.getElementById('edit-hero-bg-url');
+                        const bgFileInput = document.getElementById('edit-hero-bg-file');
+    
+                        if (bgUrlInput.value) {
+                            heroSectionContent.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${bgUrlInput.value}') center/cover`;
+                        }
+    
+                        if (bgFileInput.files && bgFileInput.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                heroSectionContent.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('${e.target.result}') center/cover`;
+                            }
+                            reader.readAsDataURL(bgFileInput.files[0]);
+                        }
+                        break;
+
+                    case 'feature':
+                        if (!currentEditElement) return;
+                        const title = document.getElementById('edit-feature-title').value;
+                        const description = document.getElementById('edit-feature-description').value;
+                        const iconColor = document.getElementById('edit-feature-color').value;
+                        const bgColor = document.getElementById('edit-feature-bg').value;
+                        
+                        if (title) currentEditElement.querySelector('h3').textContent = title;
+                        if (description) currentEditElement.querySelector('p').textContent = description;
+                        if (iconColor) currentEditElement.querySelector('.feature-icon').style.fill = iconColor;
+                        if (bgColor) currentEditElement.style.backgroundColor = bgColor;
+                        break;
+
+                    case 'pricing':
+                        if (!currentEditElement) return;
+                        const planTitle = document.getElementById('edit-plan-title').value;
+                        const planPrice = document.getElementById('edit-plan-price').value;
+                        const priceColor = document.getElementById('edit-price-color').value;
+                        const pricingBg = document.getElementById('edit-pricing-bg').value;
+                        const buttonColor = document.getElementById('edit-pricing-button').value;
+                        
+                        if (planTitle) currentEditElement.querySelector('h3').textContent = planTitle;
+                        if (planPrice) currentEditElement.querySelector('.price').textContent = "R$ "+planPrice;
+                        if (priceColor) currentEditElement.querySelector('.price').style.color = priceColor;
+                        if (pricingBg) currentEditElement.style.backgroundColor = pricingBg;
+                        if (buttonColor) currentEditElement.querySelector('.btn').style.backgroundColor = buttonColor;
+                        break;
+
+                    case 'instructor':
+                        if (!currentEditElement) return;
+                        const name = document.getElementById('edit-instructor-name').value;
+                        const role = document.getElementById('edit-instructor-role').value;
+                        const image = document.getElementById('edit-instructor-image').value;
+                        const instructorBg = document.getElementById('edit-instructor-bg').value;
+                        
+                        if (name) currentEditElement.querySelector('h3').textContent = name;
+                        if (role) currentEditElement.querySelector('p').textContent = role;
+                        if (image) currentEditElement.querySelector('img').src = image;
+                        if (instructorBg) currentEditElement.style.backgroundColor = instructorBg;
+                        break;
+
+                    case 'logo':
+                        const logoElement = document.querySelector('.logo');
+                        const logoText = document.getElementById('edit-logo-text').value;
+                        const logoColor = document.getElementById('edit-logo-color').value;
+    
+                        if (logoText) logoElement.textContent = logoText;
+                        if (logoColor) logoElement.style.color = logoColor;
+                        break;
+
+                    case 'footer':
+                            const footerTitle = document.getElementById('edit-footer-title').value;
+                            const footerCNPJ = document.getElementById('edit-footer-cnpj').value;
+                            const footerAddress = document.getElementById('edit-footer-address').value;
+                            const footerPhone = document.getElementById('edit-footer-phone').value;
+                            const footerEmail = document.getElementById('edit-footer-email').value;
+                            const footerBtnText = document.getElementById('edit-footer-btn-text').value;
+
+                            if (footerTitle) currentEditElement.querySelector('h2').textContent = footerTitle;
+                            if (footerCNPJ) currentEditElement.querySelectorAll('p')[0].textContent = `CNPJ: ${footerCNPJ}`;
+                            if (footerAddress) currentEditElement.querySelectorAll('p')[1].textContent = `Endereço: ${footerAddress}`;
+                            if (footerPhone) currentEditElement.querySelectorAll('p')[2].textContent = `Telefone: ${footerPhone}`;
+                            if (footerEmail) currentEditElement.querySelectorAll('p')[3].textContent = `Email: ${footerEmail}`;
+                            if (footerBtnText) currentEditElement.querySelector('.btn').textContent = footerBtnText;
+        }
+                // Reset currentEditElement
+                currentEditElement = null;
+                // Close modal after saving
+                document.querySelector('.edit-modal').style.display = 'none';
+                document.querySelector('.modal-overlay').style.display = 'none';
+            }
+
+            // Close modal when clicking overlay
+            document.querySelector('.modal-overlay').addEventListener('click', () => {
+                document.querySelector('.edit-modal').style.display = 'none';
+                document.querySelector('.modal-overlay').style.display = 'none';
+            });
+        </script>
+    </body>
+    </html>
